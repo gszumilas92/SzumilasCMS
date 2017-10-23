@@ -10,20 +10,20 @@ import { Components } from './components';
 export class AppComponent implements OnInit {
   
   data: Components[];
-  
+  myObject
+  myString
+
   constructor (private components:AppService) {}
 
-
   GetMyData() {
-    // this.data2 = this.components.getDataFromApi();
-    // console.log(this.data2);
-    this.components.getDataFromApi().then(data => this.data = data);
-    console.log(this.data);
+    this.components.getArrayOfDocuments().then(data => {
+      this.myObject = data[0];
+      this.myString = this.myObject.content;
+    });
   }
 
   ngOnInit() {
     this.GetMyData();
   }
-
 
 }

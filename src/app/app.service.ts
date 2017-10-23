@@ -11,7 +11,7 @@ export class AppService {
 
   constructor(private http: Http) { }
 
-  getDataFromApi():Promise<Components[]> {
+  getArrayOfDocuments():Promise<Components[]> {
     return this.http.get('/api/contents/string').toPromise().then(response => response.json() as Components[])
   }
   
