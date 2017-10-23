@@ -5,7 +5,7 @@ const fs = require('fs');
 //My Variables
 const app = express();
 const port = process.env.PORT || 3000;
-let index = fs.readFileSync(__dirname + '/public/index.html', 'utf8')
+const index = fs.readFileSync(__dirname + '/public/index.html', 'utf8')
 
 //Settings
 app.use('/assets', express.static(__dirname + '/public'));

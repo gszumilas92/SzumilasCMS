@@ -1,7 +1,7 @@
 const Contents = require('../models/contentModel');
 
-module.exports = function(app) {
-    app.get('/api/setupContents', function(req, res) {
+module.exports = (app) => {
+    app.get('/api/setupContents', (req, res) => {
         //seed database
         let starterContents = [
             {
@@ -26,8 +26,8 @@ module.exports = function(app) {
                 visible: true
             }
         ];
-        Contents.create(starterContents, function(err, results) {
+        Contents.create(starterContents, (err, results) => {
             res.send(results)
-        })
-    })
-}
+        });
+    });
+};
