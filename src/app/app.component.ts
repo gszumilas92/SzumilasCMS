@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
-import { Components } from './components';
+import { Contents } from './contents';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Components } from './components';
 })
 export class AppComponent implements OnInit {
   
-  data: Components[];
+  data: Contents[];
   myObject
   myString
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   GetMyData() {
     this.components.getArrayOfDocuments().then(data => {
       this.myObject = data[0];
-      this.myString = this.myObject.content;
+      this.myString = this.myObject.content.title;
     });
   }
 

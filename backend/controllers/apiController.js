@@ -6,8 +6,8 @@ module.exports = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.get('/api/contents/:content', (req, res) => {
-        Contents.find({ content: req.params.content }, (err, contents) => { 
+    app.get('/api/contents/:area/:contentType', (req, res) => {
+        Contents.find({ area: req.params.area }, (err, contents) => { 
             if(err) throw err;
             res.send(contents);
         });
@@ -24,10 +24,9 @@ module.exports = function(app) {
     app.post('/api/content', (req, res) => {
         if(req.body.id) {
             Contents.findByIdAndUpdate(req.body.id, {
+                area: req.body.area,
+                contentType: req.body.contentType,
                 content: req.body.content,
-                className: req.body.className,
-                title: req.body.title,
-                typeOfContent: req.body.typeOfContent,
                 visible: req.body.visible
             }, (err, content) => {
                 if(err) throw err;
@@ -35,10 +34,9 @@ module.exports = function(app) {
             });
         } else {
             let newContent = Contents({
+                area: req.body.area,
+                contentType: req.body.contentType,
                 content: req.body.content,
-                className: req.body.className,
-                title: req.body.title,
-                typeOfContent: req.body.typeOfContent,
                 visible: req.body.visible
             });
             newContent.save((err) => {

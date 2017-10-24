@@ -5,24 +5,42 @@ module.exports = (app) => {
         //seed database
         let starterContents = [
             {
-                content: 'string',
-                className: 'this is my classname',
-                title: 'this is my title string',
-                typeOfContent: 'this is my type of content string',
+                area: "landingPage",
+                contentType: "landingPage",
+                content: {
+                    header: 'Gabinet Psychologiczny',
+                    subHeader: "mgr Katarzyna Tolstych",
+                },
+                visible: true                
+            },
+            {
+                area: "mainContent",
+                contentType: "paragraph",
+                content: {
+                    title: "myTitle",
+                    text: "longStringText",                    
+                },
                 visible: true
             },
             {
-                content: 'this is my long content string',
-                className: 'this is my classname',
-                title: 'this is my title string',
-                typeOfContent: 'this is my type of content string',
+                area: "mainContent",
+                contentType: "header",
+                content: {
+                    header: 'O Mnie',
+                    subHeader: "Pasjonatka zawodu – żyjąca w myśl: „Rób, co kochasz – kochaj to, co robisz”!",
+                },
                 visible: true
             },
             {
-                content: 'this is my long content string',
-                className: 'this is my classname',
-                title: 'this is my title string',
-                typeOfContent: 'this is my type of content string',
+                area: "footer",
+                content: {
+                    header: 'Przydatne Linki',
+                    links: [
+                        "EMDR",
+                        "BDP",
+                        "Psychologia"
+                    ]
+                },
                 visible: true
             }
         ];
