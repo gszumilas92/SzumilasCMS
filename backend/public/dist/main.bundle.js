@@ -64,7 +64,7 @@ var AppComponent = (function () {
         var _this = this;
         this.components.getArrayOfDocuments().then(function (data) {
             _this.myObject = data[0];
-            _this.myString = _this.myObject.content;
+            _this.myString = _this.myObject.content.title;
         });
     };
     AppComponent.prototype.ngOnInit = function () {
@@ -157,7 +157,7 @@ var AppService = (function () {
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
     }
     AppService.prototype.getArrayOfDocuments = function () {
-        return this.http.get('/api/contents/string').toPromise().then(function (response) { return response.json(); });
+        return this.http.get('/api/contents/mainContent/paragraph').toPromise().then(function (response) { return response.json(); });
     };
     return AppService;
 }());

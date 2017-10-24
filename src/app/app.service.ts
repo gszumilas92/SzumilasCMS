@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Components } from './components';
+import { Contents } from './contents';
 
 
 @Injectable()
@@ -11,8 +11,8 @@ export class AppService {
 
   constructor(private http: Http) { }
 
-  getArrayOfDocuments():Promise<Components[]> {
-    return this.http.get('/api/contents/string').toPromise().then(response => response.json() as Components[])
+  getArrayOfDocuments():Promise<Contents[]> {
+    return this.http.get('/api/contents/mainContent/paragraph').toPromise().then(response => response.json() as Contents[])
   }
   
 }
