@@ -5,10 +5,11 @@ const fs = require('fs');
 //My Variables
 const app = express();
 const port = process.env.PORT || 3000;
-const index = fs.readFileSync(__dirname + '/public/index.html', 'utf8')
+// const index = fs.readFileSync(__dirname + '/public/index.html', 'utf8')
+const index = fs.readFileSync(__dirname + '/../dist/index.html', 'utf8')
 
 //Settings
-app.use('/assets', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/../dist'));
 mongoose.connect("mongodb://admin:testadmin@ds227045.mlab.com:27045/szumilas-cms")
 
 //Controllers

@@ -22,8 +22,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.GetMyData();
-  }
+  ngOnInit() {}
 
 }
