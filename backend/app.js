@@ -15,12 +15,12 @@ mongoose.connect("mongodb://admin:testadmin@ds227045.mlab.com:27045/szumilas-cms
 //Controllers
 const setupController = require('./controllers/setupController');
 const apiController = require('./controllers/apiController');
+const sendEmail = require('./emails/sendEmail')
 
 setupController(app);
 apiController(app);
 
-
-
+// sendEmail('gszumilas92@gmail.com','Title','<p>my Message<p>');
 
 
 

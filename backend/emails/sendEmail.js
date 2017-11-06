@@ -1,18 +1,18 @@
 'use strict';
 const nodemailer = require('nodemailer')
 const fs = require('fs')
+// To Send an email invoke Function with (reciver, subject, html message)
 
-module.exports = function(app) {
+module.exports = function(to, subject, html) {
 
     const smtpConfig = fs.readFileSync(__dirname + '/../private/passwords/smtpConfig.json', 'utf8')
-
+    const message = {
+        disableFileAccess: true,
+        to: to,
+        subject: subject,
+        html: html
+    }
     nodemailer.createTestAccount((err, account) => {
-        let message = {
-            disableFileAccess: true,
-            to: 'gszumilas92@gmail.com',
-            subject: 'Message title',
-            html: '<p>My Email Message</p>'
-        };
 
         let transporter = nodemailer.createTransport(JSON.parse(smtpConfig))
 
