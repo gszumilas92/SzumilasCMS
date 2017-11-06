@@ -1,12 +1,30 @@
 'use strict';
+const fs = require('fs');
 const nodemailer = require('nodemailer');
+const htmlstream = fs.createReadStream('content.html')
 
-// Generate test SMTP service account from ethereal.email
-// Only needed if you don't have a real mail account for testing
 nodemailer.createTestAccount((err, account) => {
+    let message = {
+        disableFileAccess: true,
+        from: 'sender@server.com',
+        to: 'gszumilas92@gmail.com',
+        subject: 'Message title',
+        text: 'Plaintext version of the message',
+        html: '<p>MY EMAIL STUFF</p>'
+    };
 
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
+    // let poolConfig = 'smtps://username:password@smtp.example.com/?pool=true';
+    // let poolConfig = {
+    //     pool: true,
+    //     host: 'smtp.gmail.com',
+    //     port: 465,
+    //     secure: true, // use TLS
+    //     auth: {
+    //         user: 'username',
+    //         pass: 'password'
+    //     }
+    // };
+    let smtpConfig = {
         host: 'smtp.ethereal.email',
         port: 587,
         secure: false, // true for 465, false for other ports
@@ -14,19 +32,16 @@ nodemailer.createTestAccount((err, account) => {
             user: account.user, // generated ethereal user
             pass: account.pass  // generated ethereal password
         }
-    });
-
-    // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"Fred Foo 👻" <foo@blurdybloop.com>', // sender address
-        to: 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>' // html body
     };
 
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
+    let transporter = nodemailer.createTransport(smtpConfig)
+
+    // transport.sendMail({html: htmlstream}, function(err){
+    //     if(err){
+    //         // check if htmlstream is still open and close it to clean up
+    //     }
+    // })
+    transporter.sendMail(message, (error, info) => {
         if (error) {
             return console.log(error);
         }
@@ -37,4 +52,13 @@ nodemailer.createTestAccount((err, account) => {
         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
     });
+
+    // // verify connection configuration
+    // transporter.verify(function(error, success) {
+    //     if (error) {
+    //             console.log(error);
+    //     } else {
+    //             console.log('Server is ready to take our messages');
+    //     }
+    // });
 });
